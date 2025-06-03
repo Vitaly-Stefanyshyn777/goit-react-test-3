@@ -1,16 +1,11 @@
-import axios from "axios";
-import { useAuthStore } from "../../zustand/auth/auth";
+import { useLogin } from "../../api/useMutation";
 
 function LoginForm() {
-  const { setAuth, user } = useAuthStore();
+  const { mutate: login } = useLogin();
   const nadelSumbit = async (event) => {
     event.preventDefault();
     const { email, password } = event.target.elements;
-    const { data } = await axios.post("/users/login", {
-      email: email.value,
-      password: password.value,
-    });
-    setAuth(data);
+    login({ email: email.value, password: password.value });
   };
   return (
     <div>
@@ -19,7 +14,6 @@ function LoginForm() {
         <input type="text" name="password" />
         <button></button>
       </form>
-      {user && <p>{user.name}</p>}
     </div>
   );
 }

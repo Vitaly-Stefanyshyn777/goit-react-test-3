@@ -4,8 +4,15 @@ import LoginPage from "./page/LoginPage";
 import RegisterPage from "./page/RegisterPage";
 import HomePage from "./page/HomePage";
 import Navigation from "./components/Navigation";
+import { useRefresh } from "./api/useMutation";
+import { useEffect } from "react";
 
 function App() {
+  const { mutate: refresh } = useRefresh();
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
   return (
     <>
       <Navigation />
