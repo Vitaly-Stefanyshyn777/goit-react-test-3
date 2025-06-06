@@ -6,6 +6,7 @@ import HomePage from "./page/HomePage";
 import Navigation from "./components/Navigation";
 import { useRefresh } from "./api/useMutation";
 import { useEffect } from "react";
+import ContactPage from "./page/ContactPage";
 
 function App() {
   const { mutate: refresh } = useRefresh();
@@ -20,6 +21,7 @@ function App() {
         <Route element={<HomePage />} path="/"></Route>
         <Route element={<LoginPage />} path="/login"></Route>
         <Route element={<RegisterPage />} path="/register"></Route>
+        <Route element={<ContactPage />} path="/contact"></Route>
       </Routes>
     </>
   );
