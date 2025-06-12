@@ -39,7 +39,10 @@ export const useRefresh = () => {
   return useMutation({
     mutationFn: token ? refresh : () => {},
     onSuccess: (data) => {
-      setUser(data ? data : null);
+      if (data) {
+        setUser(data);
+      }
+      // setUser(data ? data : null);
     },
   });
 };

@@ -7,6 +7,8 @@ import Navigation from "./components/Navigation";
 import { useRefresh } from "./api/useMutation";
 import { useEffect } from "react";
 import ContactPage from "./page/ContactPage";
+import PrivateRoute from "./components/route/PrivateRoute";
+import PublicRoute from "./components/route/PublicRoute";
 
 function App() {
   const { mutate: refresh } = useRefresh();
@@ -19,9 +21,18 @@ function App() {
       <Navigation />
       <Routes>
         <Route element={<HomePage />} path="/"></Route>
-        <Route element={<LoginPage />} path="/login"></Route>
-        <Route element={<RegisterPage />} path="/register"></Route>
-        <Route element={<ContactPage />} path="/contact"></Route>
+        <Route
+          element={<PublicRoute component={<LoginPage />} />}
+          path="/login"
+        ></Route>
+        <Route
+          element={<PublicRoute component={<RegisterPage />} />}
+          path="/register"
+        ></Route>
+        <Route
+          element={<PrivateRoute component={<ContactPage />} />}
+          path="/contact"
+        ></Route>
       </Routes>
     </>
   );
