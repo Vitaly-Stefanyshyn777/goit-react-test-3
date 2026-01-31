@@ -24,3 +24,5 @@ function RegisterForm() {
 }
 
 export default RegisterForm;
+
+// app/contacts/page.jsx

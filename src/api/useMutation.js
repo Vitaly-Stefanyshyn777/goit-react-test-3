@@ -35,38 +35,40 @@ export const useRegister = () => {
 export const useRefresh = () => {
   const { token, setUser } = useAuthStore();
 
-  setAuthHedar(token);
+  if (token) {
+    setAuthHedar(token);
+  }
+
   return useMutation({
-    mutationFn: token ? refresh : () => {},
+    mutationFn: refresh,
     onSuccess: (data) => {
       if (data) {
         setUser(data);
       }
-      // setUser(data ? data : null);
     },
   });
 };
 
-export const useFethContacts = () => {
+export const useFetchContacts = () => {
   return useQuery({ queryKey: ["contacts"], queryFn: fetchContact });
 };
 
 export const useAddContact = () => {
-  const queryCliqnt = useQueryClient();
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: addContact,
     onSuccess: () => {
-      queryCliqnt.invalidateQueries(["contacts"]);
+      queryClient.invalidateQueries({ queryKey: ["contacts"] });
     },
   });
 };
 
 export const useDeleteContact = () => {
-  const queryCliqnt = useQueryClient();
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: deleteContact,
     onSuccess: () => {
-      queryCliqnt.invalidateQueries(["contacts"]);
+      queryClient.invalidateQueries({ queryKey: ["contacts"] });
     },
   });
 };
